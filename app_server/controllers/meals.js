@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-var foods = JSON.parse(fs.readFileSync('../data/foods.json', 'utf8'));
+var foods = JSON.parse(fs.readFileSync('data/foods.json', 'utf8'));
 
 /* GET meals view */
 const meals = (req, res) => {
