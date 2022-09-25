@@ -9,3 +9,6 @@ CS-465 Full Stack Development with MEAN
     - git stash (your changes)
     - git checkout -b *
     - git stash pop
+
+3. to run mongodb, from desktop run this command:
+    mongod --config /opt/homebrew/etc/mongod.conf
