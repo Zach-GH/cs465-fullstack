@@ -4,6 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const hbs = require("hbs");
+require("./app_api/database/db");
 
 var indexRouter = require("./app_server/routes/index");
 var usersRouter = require("./app_server/routes/users");
@@ -14,6 +15,7 @@ var mealsRouter = require("./app_server/routes/meals");
 var contactRouter = require("./app_server/routes/contact");
 var aboutRouter = require("./app_server/routes/about");
 
+const apiRouter = require("./app_api/routes/index");
 var app = express();
 
 // view engine setup
@@ -47,6 +49,7 @@ app.use("/news", newsRouter);
 app.use("/meals", mealsRouter);
 app.use("/contact", contactRouter);
 app.use("/about", aboutRouter);
+app.use("/api", apiRouter);
 
 app.use((err, req, res, next) => {
   if (err.name === "UnauthorizedError") {
