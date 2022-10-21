@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -50,8 +52,15 @@ app.use("/news", newsRouter);
 app.use("/meals", mealsRouter);
 app.use("/contact", contactRouter);
 app.use("/about", aboutRouter);
-
 app.use("/api", apiRouter);
+
+app.use(function(err, req, res, next) {
+  if (err.name === "UnauthorizedError") {
+    res
+      .status(401)
+      .json({ "message": err.name + ": " + err.message});
+  }
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

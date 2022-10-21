@@ -8,6 +8,7 @@ const auth = jwt({
   algorithms: ["HS256"],
 });
 
+const authCOntroller = require('.../controllers/authentication');
 const tripsController = require("../controllers/trips");
 
 router.route("/login").post(authController.login);
@@ -17,12 +18,12 @@ router.route("/register").post(authController.register);
 router
   .route("/trips")
   .get(tripsController.tripsList)
-  .post(tripsController.tripsAddTrip);
+  .post(auth, tripsController.tripsAddTrip);
 
 router
   .route("/trips/:tripCode")
-  .get(tripsController.tripsList)
-  .put(tripsController.tripsUpdateTrip);
+  .get(tripsController.tripsFindCode)
+  .put(auth, tripsController.tripsUpdateTrip);
 
 router.route("/trips/:tripCode").get(tripsController.tripsFindCode);
 
